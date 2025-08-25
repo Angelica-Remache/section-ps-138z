@@ -1,0 +1,2 @@
+Welcome to the repository for the sections of PS-138Z: The Politics of Immigration! 
+This repository contains materials and resources to support our section activities. You can use these files to follow along in section, complete assignments, and review key concepts. Please clone or download the repository to access the materials, and ensure you have access to Jupyter Notebooks to run and explore the code.
