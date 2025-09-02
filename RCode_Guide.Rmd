@@ -1,0 +1,184 @@
+---
+title: "R Code Guide"
+subtitle: "Case File #1997-US-S"
+date: "September 4, 2025"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+# Turn off evaluation for all chunks
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+## Getting Started
+
+```{r}
+# First, load your dataset 
+data <- read.csv("1997_data.csv")
+```
+
+## Phase 1: Understanding Your Dataset's Size and Structure
+
+### How big is your dataset?
+
+```{r}
+# Get the dimensions (rows x columns)
+dim(data)
+```
+
+**INTEL** 
+
+**What this does**: Shows you [number of rows, number of columns]. Rows usually = observations/people, columns = variables/questions.
+
+
+```{r}
+# Get the number of rows
+nrow(data)
+
+# Get the number of columns
+ncol(data)
+```
+
+**INTEL**
+
+**What this does**: `nrow()` tells you how many observations you have `ncol()` tells you how many variables were measured.
+
+
+### What types of data do you have?
+
+```{r}
+# See the structure of your dataset
+str(data)
+```
+
+**INTEL**
+
+**What this does**: This is your data blueprint. Shows you each column name, what type of data it is (numbers, text, etc.), and a preview of the first few values. In other words, it is like getting a research codebook for the study.
+
+```{r}
+# Get column names
+names(data)
+```
+
+**INTEL**
+
+**What this does**: Lists all the column names. Look for patterns - do they follow a naming scheme?
+
+## Phase 2: Looking at Your Data
+
+### Peek at your data
+
+```{r}
+# See the first 6 rows
+head(data)
+
+# See the first 10 rows
+head(data, 10)
+```
+
+**INTEL**
+
+**What this does**: Shows you the actual data values. This is like looking at the first page of a survey to see what responses look like.
+
+```{r}
+# See the last few rows
+tail(data)
+```
+
+**INTEL**
+
+**What this does**: Sometimes the end of a dataset is different from the beginning. This checks that.
+
+### Get a statistical overview
+```{r}
+# Get summary statistics for all columns
+summary(data)
+```
+
+**INTEL**
+
+**What this does**: For each column, shows you the minimum, maximum, average, median, and other statistics. For text data, it shows the most common values.
+
+## Phase 3: Investigating Specific Columns
+
+### Look at unique values in a column
+
+```{r}
+# See all unique values in a specific column (replace "Q1" with any column name)
+unique(data$Q1)
+```
+
+**INTEL**
+
+**What this does**: Shows you every different value that appears in that column. Great for understanding response scales (like 1-5 ratings) or categories.
+
+```{r}
+# Count how many unique values there are
+length(unique(data$Q1))
+```
+
+**INTEL**
+
+**What this does**: Tells you how many different response options there were. 2 = yes/no, 5 = probably a rating scale, 50+ = maybe open-ended responses.
+
+### Count responses
+
+```{r}
+# Count how many times each value appears
+table(data$Q1)
+```
+
+**INTEL**
+
+**What this does**: Shows you how many people gave each response. Helps you see if most people agreed or if opinions were split.
+
+```{r}
+# Get percentages instead of counts
+prop.table(table(data$Q1))
+```
+
+**INTEL**
+
+**What this does**: Same as above, but shows proportions (0.0 to 1.0) instead of raw numbers.
+
+### Look at missing data
+```{r}
+# Count missing values in each column
+sapply(data, function(x) sum(is.na(x)))
+```
+
+**INTEL**
+
+**What this does**: Shows how many people didn't answer each question. High numbers might indicate sensitive questions.
+
+
+
+## Pro Tips for Data Detectives
+
+1. **Start big, then zoom in**: Use `dim()` and `str()` first to get the big picture, then use `head()` and `summary()` to see details.
+
+2. **Look for patterns in column names**: Are they Q1, Q2, Q3? Or Age, Income, Education? This tells you about how the data was organized.
+
+3. **Check the range of values**: If you see mostly 1-5 or 1-7, you're probably looking at rating scales. If you see 18-99, might be ages.
+
+4. **Pay attention to missing data**: Questions with lots of missing answers might be sensitive topics.
+
+5. **Use `unique()` liberally**: It's the fastest way to understand what each column actually contains.
+
+
+
+## Reference Commands 
+### This table will help you when completing your project. Save it!
+| Want to know... | Use this code |
+|---|---|
+| How many rows? | `nrow(data)` |
+| How many columns? | `ncol(data)` |
+| What does the data look like? | `head(data)` |
+| What types of data? | `str(data)` |
+| Statistical overview? | `summary(data)` |
+| What values are in column Q1? | `unique(data$Q1)` |
+| How many people gave each answer to Q1? | `table(data$Q1)` |
+| Any missing data? | `sapply(data, function(x) sum(is.na(x)))` |
