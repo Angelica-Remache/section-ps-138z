@@ -1,0 +1,66 @@
+---
+title: "Section 3: Worksheet"
+subtitle: "Solutions"
+author: "Angelica Remache Lopez"
+date: "2025-09-09"
+output: pdf_document
+---
+
+# Worksheet 2: Section 2
+
+## Load your data
+
+```{r}
+# Loading data
+data <- read.csv("file:///Users/angelica/Desktop/PS138Z_Data/survey_attitudes_immigrants.csv")
+```
+
+## What is the total number of observation in the data?
+
+```{r}
+# Finding the number of observations/raws 
+nrow(data)
+```
+
+## What is the total number of variables in the data?
+
+```{r}
+# Finding the number of variables/columns
+ncol(data)
+```
+
+## For how many observations do we have information about wheather they are citizens or have taken any steps to apply for a US citizenship (*S5* in the dataset)?
+
+```{r}
+# Getting the total number of responses we have for this questions on US citizenship 
+# we are using the symbol ($) because from our data we are choosing only the column/variable "S5"
+# which is the question on citizenship
+
+sum(is.na(data$S5))
+```
+## For how many observations do we have information about wheather they are citizens or have taken any steps to apply for a US citizenship (*S5* in the dataset)?
+
+```{r}
+# Getting the total number of N/As we have for this question on US citizenship 
+# We use (!) when we reverse our code
+
+sum(!is.na(data$S5))
+```
+
+
+## How many people think that "On the whole, immigration has been a good thing/bad thing/some good/some bad/ don't know for the United States in the past?" (*Q5*)
+
+Note that: 
+1= Good thing
+2 = Bad thing 
+3 = Some good/some bad
+9 = Don't know
+
+```{r}
+
+# We can get a table to see the summary of this question and then see the number of respondents for each value
+table(data$Q3)
+
+```
+
+

@@ -1,0 +1,242 @@
+---
+title: "Section 4: Worksheet"
+author: "[Write your name here]"
+date: "2025-09-16"
+output: pdf_document
+---
+
+# Background Information
+Today is not only about being a good coder, but also about being CREATIVE!
+You will learn how to create a plot using R. For that, you will need to know the following information to respond to the next questions:
+
+*Column: SEX*
+Record Respondent's Sex:
+1. Male
+2. Female 
+
+*Column: S2*
+What is your race?
+2. Black or African American
+
+*Column: S3*
+Are you Hispanic or Latino?
+1. Yes, Mexican 
+2. Yes, Puerto Rican
+3. Yes, Cuban 
+4. Yes, other Spanish background
+
+*Column: 3*
+On the whole, do you think immigration (people coming from other countries to LIVE in the US) has been a good thing or bad thing to the US IN THE PAST?*
+1. Good thing 
+2. Bad thing
+3. Some good/Some bad
+9. Don't Know/Refused
+
+*Column: 4*
+On the whole, do you think immigration (people coming from other countries to LIVE in the US) has been a good thing or bad thing to the US TODAY?*
+
+1. Good thing 
+2. Bad thing
+3. Some good/Some bad
+9. Don't Know/Refused
+
+*Column: 9*
+As far as you know, do MOST immigrants in this group who live in your city or town have higher family incomes than you do, lower incomes, or are their incomes about the same as yours?
+
+1. Higher
+2. Lower
+3. About the same
+9. Don't know/Refused
+
+*Column: 10A*
+Have recent immigrants made the overall quality of life in your city or town better or worse, or haven’t they had much effect either way?
+
+*Column: 10C*
+Have recent immigrants made the local crime situation better or worse, or haven’t they had much effect either way?
+
+*Column: 10E*
+Have recent immigrants made the local food, music, arts, and culture better or worse, or haven’t they had much effect either way?
+
+*Column: 10F*
+Have recent immigrants made the local economy in general better or worse, or haven’t they had much effect either way?
+
+Note that:
+1. Better 
+2. Worse 
+3. Not much effect 
+4. Don’t know 
+5. Refused 
+
+# Before you start, remember to:
+
+```{r}
+# load you data 
+
+# load the packages you will need
+library(dplyr)
+library(ggplot2)
+
+```
+
+
+# Question 1 
+## Bar Plots
+
+## a. Using the information we have on Black/African American, create a bar plot with their average respoonse to Question 3, which is "On the whole, do you think immigration (people coming from other countries to LIVE in the US) has been a good thing or bad thing to the US IN THE PAST?" Order your bars from highest to lowest.
+
+```{r}
+### COMMENT WHAT THE CODE IS DOING
+# 
+labels_q3 <- c("1" = "Good thing",
+               "2" = "Bad thing",
+               "3" = "Some good/Some bad")
+data %>%
+  filter(S2 == 2, `Q3` != 9) %>%    # Black/African American only
+  group_by(`Q3`) %>% #
+  summarise(mean_response = mean(`Q3`, na.rm = TRUE)) %>% #
+  ggplot(aes(x = reorder(as.factor(`Q3`), -mean_response), # 
+             y = mean_response,
+             fill = as.factor(`Q3`))) +
+  geom_bar(stat = "identity") + # 
+  scale_x_discrete(labels = labels_q3) + 
+  scale_fill_manual(values = c("1" = "skyblue", "2" = "salmon", "3" = "gold")) + 
+  labs(title = "Immigration in the Past (Black/African American)", #
+       x = "Response Category", #
+       y = "Average Response", #
+       fill = "Response") +
+  theme_minimal() #
+
+# YOU CAN CHANGE THE COLORS!
+
+```
+
+
+## b. Using the information we have on Hispanic/Latino, pick one of the identities (Mexican, Puerto Rican, Cuban, Others), and create a bar plot with their average respoonse to Question 4, which is "On the whole, do you think immigration (people coming from other countries to LIVE in the US) has been a good thing or bad thing to the TODAY?" Order your bars from lowest to highest.
+
+```{r}
+
+### COMMENT WHAT THE CODE IS DOING AND CHANGE THE CODE WHEN NEEDED
+#
+labels_q4 <- c("1" = "Good thing",
+               "2" = "Bad thing",
+               "3" = "Some good/Some bad")
+
+XXX %>%
+  filter(S3 == 1, `QX` != 9) %>%    # Example: Mexicans only: Q4
+  group_by(`QX`) %>%
+  summarise(mean_response = mean(`QX`, na.rm = TRUE)) %>%
+  XXX(aes(x = reorder(as.factor(`Q4`), mean_response), #
+             y = mean_response,
+             fill = as.factor(`Q4`))) +
+  XXX(stat = "identity") +
+  scale_x_discrete(labels = labels_q4) +
+  scale_fill_manual(values = c("1" = "forestgreen", "2" = "orange", "3" = "purple")) +
+  labs(title = "Immigration Today (Mexican Respondents)",
+       x = "Response Category",
+       y = "Average Response",
+       fill = "Response") +
+  XXX()
+
+# YOU CAN CHANGE THE COLORS!
+```
+
+
+# Question 2 
+## Density Plots
+
+Create a histogram for:
+
+## a. Have recent immigrants made the local crime situation better or worse, or haven’t they had much effect either way? (Q10C)
+
+```{r}
+# What do we do first? Labels? Add them now:
+labels_10 <- c("1" = "",
+               "2" = "",
+               "3" = "")
+
+data %>%
+  filter(`XXX` < 4) %>% # What are we filtering by?
+  XXX(aes(x = as.factor(`Q10C`), fill = as.factor(`Q10C`))) + # What package do we use?
+  geom_XXX(stat = "count", color = "black") + # What are we creating? 
+  scale_x_discrete(labels = labels_10) +
+  scale_fill_manual(values = c("1" = "XXX", "2" = "XXX", "3" = "XXX")) + # Add the colors you want for each value
+  labs(title = "XXX", # Give a title
+       x = "Response Category",
+       y = "Count",
+       fill = "Response") +
+  theme_light()
+
+```
+
+
+## b. Have recent immigrants made the local food, music, arts, and culture better or worse, or haven’t they had much effect either way?
+
+```{r}
+
+# The code is similar to the above. 
+# Remember that the only thing that will change is the Question (Q10E)
+
+# WRITE THE CODE!!!
+
+```
+Note that:
+1. Better 
+2. Worse 
+3. Not much effect 
+4. Don’t know 
+5. Refused 
+
+# Question 3 (Pick one)
+## Density Plot 
+
+## a. Using the information we have on Column 9 (“As far as you know, do MOST immigrants in this group who live in your city or town have higher family incomes than you do, lower incomes, or are their incomes about the same as yours?”), create a density plot that compares the distribution of responses between Male and Female respondents.
+
+# Please, interpret what you see:
+
+```{r}
+labels_q9 <- c("1" = "Higher",
+               "2" = "Lower",
+               "3" = "About the same")
+
+labels_sex <- c("1" = "Male",
+                "2" = "Female")
+
+data %>%
+  filter(`Q9` < 9) %>%
+  ggplot(aes(x = `Q9`, fill = as.factor(SEX))) +
+  geom_density(alpha = 0.5) +
+  scale_x_continuous(breaks = 1:3, labels = labels_q9) +
+  scale_fill_manual(values = c("1" = "blue", "2" = "pink"),
+                    labels = labels_sex) +
+  labs(title = "Perceptions of Immigrant Family Income by Sex",
+       x = "Response Category",
+       y = "Density",
+       fill = "Sex") +
+  theme_minimal()
+
+```
+
+## a. Using the information we have on Column 10F (“Have recent immigrants made the local economy in general better or worse?”), create a density plot that compares the distribution of responses between Male and Female respondents.
+
+```{r}
+
+# CREATE THE CODE (Hint: the code is similar to the above. Change to Q10F)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# YOU GOT THIS! 
+
+```
+
+

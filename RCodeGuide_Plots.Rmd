@@ -1,0 +1,112 @@
+---
+title: "R Code Guide: Bar Plots, Histograms, and Density Plots"
+subtitle: "Section 4"
+author: "Angelica Remache Lopez"
+date: "2025-09-18"
+output: pdf_document
+---
+
+```{r echo = FALSE}
+# Don't run code, but still show chunks when knitting
+knitr::opts_chunk$set(eval = FALSE, echo = TRUE)
+```
+
+
+# Introduction
+
+In this section, we are going to learn how to **visualize data** in R using `ggplot2`.  
+We’ll start with **bar plots** (categorical data), then move to **histograms** (continuous data), and finally **density plots** (smoothed distributions).  
+
+Remember: **Today is not only about being a good coder, but also about being CREATIVE!**  
+
+You will use these tools to answer questions about immigration perceptions, but first we’ll practice with general examples.
+
+# Load the required packages
+
+```{r}
+# Loading the packages we need to be able to produce the graphs
+library(dplyr)
+library(ggplot2)
+```
+
+
+# Step 1: ggplot Grammar of Graphics
+
+Every plot in `ggplot2` has three parts:
+
+1. **Data**: the dataset you want to use.  
+2. **Aesthetics (`aes`)**: how variables are mapped to the plot (x-axis, y-axis, fill, color).  
+3. **Geometric layers (`geom_*()`)**: what kind of plot you make (bars, points, densities).  
+
+
+```{r}
+# ggplot skeleton
+ggplot(YOUR_DATA, aes(x = XVAR, y = YVAR, fill = GROUP)) +
+  geom_something()
+```
+
+# Step 2: Bar Plots
+
+Bar plots are best for categorical variables.
+We will first plot counts, then plot group means.
+
+```{r}
+# Template for counts
+YOUR_DATA %>%
+  filter(!is.na(CAT_VAR)) %>%
+  count(CAT_VAR) %>%
+  ggplot(aes(x = reorder(as.factor(CAT_VAR), -n), y = n)) +
+  geom_col(fill = "blue") +
+  labs(title = "Counts by Category", x = "Category", y = "Count") +
+  theme_minimal()
+```
+
+This is especially useful for your Assignment 1:
+
+```{r}
+# Template for group means
+YOUR_DATA %>%
+  filter(!is.na(GROUP_VAR), !is.na(RESP_VAR)) %>%
+  group_by(GROUP_VAR) %>%
+  summarise(mean_resp = mean(RESP_VAR, na.rm = TRUE)) %>%
+  ggplot(aes(x = reorder(GROUP_VAR, -mean_resp), y = mean_resp)) +
+  geom_col(fill = "red") +
+  labs(title = "Average Response by Group", x = "Group", y = "Mean Response") +
+  theme_classic()
+
+```
+
+# Step 3: Histograms
+
+Histograms show the distribution of a continuous variable.
+They work by dividing values into bins.
+
+```{r}
+# Histogram template
+ggplot(YOUR_DATA, aes(x = NUMERIC_VAR)) +
+  geom_histogram(aes(y = ..density..), bins = 20, color = "black", fill = "lightgray") +
+  labs(title = "Histogram with Density Scale", x = "Value", y = "Density") +
+  theme_minimal()
+
+```
+
+# Step 4: Density Plots
+
+A density plot is a smoothed histogram.
+It helps you see the shape of a distribution, and compare groups.
+
+```{r}
+# Single density
+ggplot(YOUR_DATA, aes(x = NUMERIC_VAR)) +
+  geom_density(fill = "steelblue", alpha = 0.4) +
+  labs(title = "Density Plot", x = "Value", y = "Density") +
+  theme_light()
+
+# By group
+ggplot(YOUR_DATA, aes(x = NUMERIC_VAR, fill = GROUP_VAR, color = GROUP_VAR)) +
+  geom_density(alpha = 0.25) +
+  labs(title = "Density by Group", x = "Value", y = "Density") +
+  theme_minimal()
+
+```
+
