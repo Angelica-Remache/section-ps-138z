@@ -1,0 +1,51 @@
+---
+title: "Section 6: Worksheet"
+author: "[Write your name here]"
+date: "2025-10-02"
+output: pdf_document
+---
+
+Today we will learn how to measure the relationship between two variables using correlation. Correlation tells us whether two variables move together (positive), move in opposite directions (negative), or do not have much of a relationship (near zero).
+
+We’ll work with historical census data from U.S. state economic areas (SEAs). Specifically, we will look at:
+
+- **`european_immigrant_share_b`**: share of European immigrants before the 1920s border closures
+
+- **`income_change`**: change in native-born income between 1910 and 1930
+
+We will find the correlation and make a scatter plot, so we can see whether areas with more immigrants before the 1920s tended to have higher or lower income changes for native-born workers.
+
+# Load the data
+
+```{r}
+
+```
+
+# Compute the correlation
+Use the `cor()` function to calculate the correlation:
+
+```{r}
+
+```
+
+This will return a number between **-1** and **1**:
+- Positive value: as immigrant share increases, income also increases.
+- Negative value: as immigrant share increases, income decreases.
+- Near 0: little to no linear relationship.
+
+
+# Graph the relationship
+(hint: see the document about Correlation)
+
+```{r}
+## COMMENT ON YOUR CODE!
+# Don't forget to add your library!
+
+
+```
+
+
+# Interpretation 
+Based on the correlation value and the scatter plot, what does the relationship between pre-1920s immigrant share and income change look like? Is it positive, negative, or close to zero? What might this suggest about areas with higher immigrant populations before the 1920s border closures?
+
+
