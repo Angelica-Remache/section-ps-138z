@@ -1,0 +1,56 @@
+---
+title: "Section 7: R Review Worksheet"
+author: "Your Name"
+date: "2025-10-09"
+output: pdf_document
+---
+
+# This is your last R worksheet!
+
+We will be using everything that you have learned so far using historical census data (1900–1940) from State Economic Areas (SEAs).
+
+You will need the following two variables:
+
+- **`immigration_change`**: the change in the share of
+European immigrants in a SEA after the 1920s border closures (between 1910 and
+1930)
+
+- **`income_change`**: change in native-born income between 1910 and 1930
+
+- **`sea_type`**: character variable that indicates the economic sector of a SEA. (If you decide to do the bar plot, this will be your X value)
+
+
+# You can decide to create a correlation plot OR a bar plot:
+
+
+
+1. Load your data
+```{r}
+
+```
+
+2. Load your libraries
+```{r}
+
+```
+
+2. PLOT
+```{r}
+
+```
+
+
+
+
+
+
+
+
+End of exercise!
+-----
+```{r}
+ggplot(NULL) +
+  annotate("text", x=0, y=0, label="You’re now officially a PRO! ", size=6)
+
+```
+
